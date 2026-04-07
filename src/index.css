@@ -1,0 +1,209 @@
+@import 'tailwindcss';
+
+@theme inline {
+	--font-sans: 'Inter', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+	--color-bg: var(--c-bg);
+	--color-surface: var(--c-surface);
+	--color-overlay: var(--c-overlay);
+	--color-border: var(--c-border);
+	--color-text: var(--c-text);
+	--color-subtext: var(--c-subtext);
+	--color-accent: var(--c-accent);
+	--color-accent-dim: var(--c-accent-dim);
+	--color-correct: var(--c-correct);
+	--color-error: var(--c-error);
+	--color-cursor: var(--c-cursor);
+}
+
+:root,
+[data-theme='dark'] {
+	--c-bg: #1e1e2e;
+	--c-surface: #313244;
+	--c-overlay: #45475a;
+	--c-border: #313244;
+	--c-text: #cdd6f4;
+	--c-subtext: #7f849c;
+	--c-accent: #cba6f7;
+	--c-accent-dim: #40394d;
+	--c-correct: #a6e3a1;
+	--c-error: #f38ba8;
+	--c-cursor: #cba6f7;
+}
+
+[data-theme='light'] {
+	--c-bg: #eff1f5;
+	--c-surface: #e6e9ef;
+	--c-overlay: #ccd0da;
+	--c-border: #ccd0da;
+	--c-text: #4c4f69;
+	--c-subtext: #8c8fa1;
+	--c-accent: #8839ef;
+	--c-accent-dim: #ddd8f5;
+	--c-correct: #40a02b;
+	--c-error: #d20f39;
+	--c-cursor: #8839ef;
+}
+
+[data-theme='ocean'] {
+	--c-bg: #0d1117;
+	--c-surface: #161b22;
+	--c-overlay: #21262d;
+	--c-border: #30363d;
+	--c-text: #c9d1d9;
+	--c-subtext: #636e7b;
+	--c-accent: #58a6ff;
+	--c-accent-dim: #122436;
+	--c-correct: #3fb950;
+	--c-error: #f85149;
+	--c-cursor: #58a6ff;
+}
+
+[data-theme='sepia'] {
+	--c-bg: #f4ede0;
+	--c-surface: #ecdfc8;
+	--c-overlay: #d6c4a0;
+	--c-border: #c4af88;
+	--c-text: #3d2b1f;
+	--c-subtext: #7a5c43;
+	--c-accent: #9b5a1a;
+	--c-accent-dim: #e8d8b8;
+	--c-correct: #3a7d44;
+	--c-error: #c0392b;
+	--c-cursor: #9b5a1a;
+}
+
+[data-theme='rose-pine'] {
+	--c-bg: #191724;
+	--c-surface: #1f1d2e;
+	--c-overlay: #26233a;
+	--c-border: #31748f22;
+	--c-text: #e0def4;
+	--c-subtext: #6e6a86;
+	--c-accent: #eb6f92;
+	--c-accent-dim: #eb6f9222;
+	--c-correct: #9ccfd8;
+	--c-error: #eb6f92;
+	--c-cursor: #eb6f92;
+}
+
+[data-theme='nord'] {
+	--c-bg: #2e3440;
+	--c-surface: #3b4252;
+	--c-overlay: #434c5e;
+	--c-border: #4c566a;
+	--c-text: #eceff4;
+	--c-subtext: #616e88;
+	--c-accent: #88c0d0;
+	--c-accent-dim: #88c0d022;
+	--c-correct: #a3be8c;
+	--c-error: #bf616a;
+	--c-cursor: #88c0d0;
+}
+
+[data-theme='sunset'] {
+	--c-bg: #1a1216;
+	--c-surface: #261a1f;
+	--c-overlay: #34222a;
+	--c-border: #4a2f3a;
+	--c-text: #f2d5b0;
+	--c-subtext: #7a5a50;
+	--c-accent: #f4a261;
+	--c-accent-dim: #f4a26122;
+	--c-correct: #95c77a;
+	--c-error: #e76f51;
+	--c-cursor: #f4a261;
+}
+
+[data-theme='forest'] {
+	--c-bg: #131a14;
+	--c-surface: #1a2419;
+	--c-overlay: #243022;
+	--c-border: #2f3e2e;
+	--c-text: #d4e6c3;
+	--c-subtext: #5a7a55;
+	--c-accent: #87c38a;
+	--c-accent-dim: #87c38a22;
+	--c-correct: #87c38a;
+	--c-error: #e07070;
+	--c-cursor: #87c38a;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html,
+body,
+#root {
+	height: 100%;
+}
+body {
+	background-color: var(--c-bg);
+	color: var(--c-text);
+	font-family: 'Inter', system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
+	margin: 0;
+}
+
+/* Caret blink: instant on/off using steps(1) — crisp like a real terminal cursor */
+@keyframes caretBlink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+.caret-blink {
+	animation: caretBlink 1s steps(1) infinite;
+}
+/* No animation when actively typing — caret stays solid */
+.caret-typing {
+	animation: none;
+	opacity: 1;
+}
+
+@keyframes wiggle {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	20% {
+		transform: translateX(-6px);
+	}
+	40% {
+		transform: translateX(6px);
+	}
+	60% {
+		transform: translateX(-4px);
+	}
+	80% {
+		transform: translateX(4px);
+	}
+}
+.animate-wiggle {
+	animation: wiggle 0.45s ease;
+}
+
+/* Smooth char color transitions */
+.char {
+	transition: color 0.05s ease;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--c-overlay);
+	border-radius: 3px;
+}
