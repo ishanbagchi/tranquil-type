@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# typing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A monkeytype-style typing test app built with React 19, TypeScript, Vite, and Tailwind CSS v4.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Three modes** — timed, word count, and quote
+- **Difficulty levels** — easy, medium, hard word pools
+- **Live stats** — WPM and accuracy update as you type
+- **Results breakdown** — per-second WPM chart, raw WPM, accuracy, and keyboard error heatmap
+- **Caret styles** — beam, block, or underline
+- **Sound effects** — soft click on keypress, error sound on mistake, finish chime
+- **Themes** — multiple color themes via ThemeContext
+- **Smooth animations** — caret transitions, results chart, restart fade via Framer Motion
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **TypeScript**
+- **Vite 8** — dev server and bundler
+- **Tailwind CSS v4** — config lives in CSS via `@import "tailwindcss"`
+- **Framer Motion** — animations
+- **Lucide React** — icons
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Commands
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev      # start dev server (http://localhost:5173)
+npm run build    # type-check + production build
+npm run lint     # eslint
+npm run preview  # preview production build
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project structure
+
+```
+src/
+  components/     # UI components (TypingArea, WordDisplay, ResultsModal, StatsBar, ...)
+  contexts/       # ThemeContext, PreferencesContext
+  hooks/          # useTypingTest — core typing test state machine
+  data/           # words.ts, quotes.ts — word pools
+  types/          # index.ts — shared types
 ```
