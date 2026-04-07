@@ -191,13 +191,32 @@ export function useTypingTest(): UseTypingTestReturn {
 				(w, i) => w === words[i],
 			).length
 
-			// Build per-key error map: count how many times each target key was missed
-			const targetStr = words.join(' ')
+			// Build per-key error map using word-by-word comparison (same as computeStats)
+			// so extra chars in one word don't misalign the heatmap for subsequent words
+			const typedWordsForMap = typed.trimEnd().split(' ')
 			const keyErrorMap: Record<string, number> = {}
-			for (let i = 0; i < Math.min(typed.length, targetStr.length); i++) {
-				if (typed[i] !== targetStr[i] && targetStr[i] !== ' ') {
-					const k = targetStr[i].toLowerCase()
-					keyErrorMap[k] = (keyErrorMap[k] ?? 0) + 1
+			for (let wi = 0; wi < typedWordsForMap.length; wi++) {
+				const typedWord = typedWordsForMap[wi]
+				const targetWord = words[wi] ?? ''
+				for (
+					let ci = 0;
+					ci < Math.min(typedWord.length, targetWord.length);
+					ci++
+				) {
+					if (typedWord[ci] !== targetWord[ci]) {
+						const k = targetWord[ci].toLowerCase()
+						keyErrorMap[k] = (keyErrorMap[k] ?? 0) + 1
+					}
+				}
+				// Count skipped chars when a word was abandoned early (space pressed mid-word)
+				if (
+					typedWord.length < targetWord.length &&
+					wi < typedWordsForMap.length - 1
+				) {
+					for (let ci = typedWord.length; ci < targetWord.length; ci++) {
+						const k = targetWord[ci].toLowerCase()
+						keyErrorMap[k] = (keyErrorMap[k] ?? 0) + 1
+					}
 				}
 			}
 
