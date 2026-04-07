@@ -128,7 +128,10 @@ function KeyboardHeatmap({
 			<p className="text-[10px] text-subtext uppercase tracking-widest mb-2">
 				key errors
 			</p>
-			<KeyboardLayout getKeyStyle={getKeyStyle} getKeyLabel={getKeyLabel} />
+			<KeyboardLayout
+				getKeyStyle={getKeyStyle}
+				getKeyLabel={getKeyLabel}
+			/>
 		</div>
 	)
 }
